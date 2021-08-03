@@ -14,6 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Personal Expanses',
+      theme: ThemeData(
+        primaryColor: Colors.deepOrange,
+        accentColor: Colors.deepOrangeAccent.shade200,
+      ),
       home: ItemsScreen() ,
     );
   }

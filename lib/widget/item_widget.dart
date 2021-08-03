@@ -1,15 +1,19 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ItemWidget extends StatelessWidget {
-  final String? id, title;
-  final double? price;
-  final DateTime? date;
+  final String id, title;
+  final double price;
+  final DateTime date;
+  final Function removeItem;
   const  ItemWidget(
     this.id ,
     this.title ,
     this.price ,
-    this.date ,{
+    this.date ,
+    this.removeItem,{
     Key? key
   }) : super(key: key);
 
@@ -21,18 +25,26 @@ class ItemWidget extends StatelessWidget {
         elevation: 5,
         child: ListTile(
           leading: CircleAvatar(
+            backgroundColor: Theme.of(context).accentColor,
             child: FittedBox(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text('\$$price'),
+                  child: Text(
+                    '\$$price',
+                    style: TextStyle(
+                      color: Colors.white70,
+                    ),
+                  ),
                 )
             ),
             radius: 30.0,
           ),
           title: Text('$title'),
-          subtitle: Text('${DateFormat.yMMMd().format(date)}'),
+          subtitle: Text('${DateFormat.yMMMEd().format(date)}'),
           trailing: IconButton(
-            onPressed: (){},
+            onPressed: (){
+              removeItem(id);
+            },
             icon: Icon(Icons.delete),
             color: Colors.red,
           ),
